@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: executive_dashboard
+    label: "Executive Dashboard"
+    type: dashboard
+    maturity: low
+    url: https://7e942fbd.us2a.app.preset.io:443/r/2
+    url: https://46caba84.us1a.app.preset.io/superset/dashboard/p/x8bNPZwzwAq/
+    description: Executive Dashboard about Airbnb listings and hosts
+    depends_on:
+      - ref('dim_listings_w_hosts')
+      - ref('mart_fullmoon_reviews')
+    owner:
+      name: Sivateja
+      email: sivatejaboddu510@gmail.com
