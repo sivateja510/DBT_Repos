@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name : buybox
+    schema : raw
+    tables :
+      - name : BB_Raw_data
+        identifier : bb_raw
+
+
