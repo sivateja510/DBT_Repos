@@ -16,6 +16,7 @@ flatten_payload as (
 ),
 flatten_offer as (
     select 
+        row_number() over(partition by asin order by NotificationId desc) as OfferID,
         NotificationId,
         ASIN,
         offer.value:"SellerId"::STRING as SELLERID,
@@ -29,6 +30,7 @@ flatten_offer as (
     lateral flatten(input => flatten_payload.Offers) as offer
 )
 select 
+    OfferID,
     NotificationId,
     ASIN,
     SELLERID,
