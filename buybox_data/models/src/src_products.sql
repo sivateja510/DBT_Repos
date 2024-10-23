@@ -5,6 +5,8 @@ with source_data as(
 flatten_payload as(
     select raw_data:"Payload"::Object:"AnyOfferChangedNotification"::Object:"OfferChangeTrigger"::ARRAY as offer from source_data
 )
-select offer.value:"ASIN"::STRING as ASIN,
+select 
+    UUID_STRING() AS surrogatekey,
+    offer.value:"ASIN"::STRING as ASIN,
        offer.value:"MarketplaceId"::STRING as MarketplaceId
 from flatten_payload f, LATERAL FLATTEN(input=>f.offer) as offer

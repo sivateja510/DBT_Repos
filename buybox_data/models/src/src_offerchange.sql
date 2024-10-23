@@ -5,6 +5,7 @@ with source_data as(
 ),
 flatten_payload as(
     select 
+        UUID_STRING() AS surrogatekey,
         raw_data:"NotificationMetadata"::Object:"PublishTime"::STRING as PublishTime,
         raw_data:"Payload"::Object:"AnyOfferChangedNotification"::Object:"OfferChangeTrigger"::Object:"ASIN"::STRING as ASIN ,
         raw_data:"Payload"::Object:"AnyOfferChangedNotification"::Object:"OfferChangeTrigger"::Object:"ItemCondition"::STRING as ItemCondition 

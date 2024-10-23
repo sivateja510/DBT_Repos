@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name : dbt-cloud-01
+    schema : dbt_bsivateja
+    tables :
+      - name : BB_Raw_data
+        identifier : BUYBOX_RAW_DATA
+        
+
+

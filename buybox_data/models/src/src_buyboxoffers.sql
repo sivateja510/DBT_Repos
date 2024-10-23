@@ -10,12 +10,13 @@ flatten_payload as (
 ),
 flatten_notification as (
     select
+        UUID_STRING() AS surrogatekey,
         offer.value:"Condition"::STRING as Condition,
         offer.value:"FulfillmentChannel"::STRING as EligibleOfferFullfillmentChannel,
         offer.value:"OfferCount"::INTEGER as EligibleOfferCount,
         offers.value:"Condition"::STRING as NumberOfferCondition,
         offers.value:"FulfillmentChannel"::STRING as NumberOfferFullfillmentChannel,
-        offers.value:"OfferCount"::INTEGER as NumberOfferCount,
+        offers.value:"OfferCount"::INTEGER as NumberOfferCount
         
     from flatten_payload,
     lateral flatten(input => flatten_payload.summary) as offer,

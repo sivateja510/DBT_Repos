@@ -11,6 +11,7 @@ flatten_payload as (
 ),
 flatten_notification as (
     select
+        UUID_STRING() AS surrogatekey,
         NotificationId,
         offer.value:"LandedPrice"::Object:"Amount"::FLOAT as BB_LandingPrice,
         offer.value:"ListingPrice"::Object:"Amount"::FLOAT as BB_ListingPrice,

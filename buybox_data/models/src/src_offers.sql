@@ -9,6 +9,7 @@ with source_data as (
 flatten_payload as (
     select 
         raw_data:"NotificationMetadata"::Object:"NotificationId"::STRING as NotificationId,
+        raw_data:"NotificationMetadata"::Object:"PublishTime"::STRING as PublishTime,
         offer.value:"ASIN"::STRING as ASIN,
         raw_data:"Payload"::Object:"AnyOfferChangedNotification"::Object:"Offers"::ARRAY as Offers
     from source_data, 
@@ -19,6 +20,7 @@ flatten_offer as (
         row_number() over(partition by asin order by NotificationId desc) as OfferID,
         NotificationId,
         ASIN,
+        PublishTime,
         offer.value:"SellerId"::STRING as SELLERID,
         offer.value:"IsBuyBoxWinner"::BOOLEAN as IsBuyBoxWinner,
         offer.value:"ListingPrice"::Object:"Amount"::FLOAT as ListingPriceAmount,
@@ -30,9 +32,11 @@ flatten_offer as (
     lateral flatten(input => flatten_payload.Offers) as offer
 )
 select 
+    UUID_STRING() AS surrogatekey,
     OfferID,
     NotificationId,
     ASIN,
+    PublishTime,
     SELLERID,
     IsBuyBoxWinner,
     ListingPriceAmount,

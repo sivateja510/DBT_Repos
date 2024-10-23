@@ -13,6 +13,7 @@ flatten_payload AS (
 ),
 flatten_offers AS (
     SELECT 
+        UUID_STRING() AS surrogatekey,
         message_id,
         NotificationId,
         EventTime, 

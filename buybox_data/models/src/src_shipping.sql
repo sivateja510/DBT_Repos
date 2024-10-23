@@ -11,6 +11,7 @@ flatten_payload as (
 ),
 flatten_shipping as (
     select 
+        UUID_STRING() AS surrogatekey,
         NotificationId,
         offer.value:"Shipping"::Object:"Amount"::FLOAT as ShippingAmount,
         offer.value:"Shipping"::Object:"CurrencyCode"::STRING as CurrencyCode,

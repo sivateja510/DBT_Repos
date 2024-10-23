@@ -5,6 +5,7 @@ with source_data as(
 ),
 flatten_data as(
     select 
+        UUID_STRING() AS surrogatekey,
         raw_data:"NotificationMetadata"::Object:"NotificationId" :: STRING as NotificationId,
         raw_data:"NotificationMetadata"::Object:"PublishTime" :: TIMESTAMP as PublishTime,
         raw_data:"NotificationMetadata"::Object:"SubscriptionId" :: STRING as SubscriptionId,

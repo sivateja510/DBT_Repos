@@ -11,9 +11,10 @@ flatten_payload as (
 ),
 flatten_notification as (
     select
-    ASIN,
-    offer.value:"ProductCategoryId"::STRING as ProductCategoryId,
-    offer.value:"Rank"::BIGINT as Rank,
+        UUID_STRING() AS surrogatekey,
+        ASIN,
+        offer.value:"ProductCategoryId"::STRING as ProductCategoryId,
+        offer.value:"Rank"::BIGINT as Rank,
 
     from flatten_payload,
     lateral flatten(input => flatten_payload.summary) as offer,

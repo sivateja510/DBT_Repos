@@ -20,7 +20,7 @@ select
     offer.value:"SellerId"::STRING as SellerId,
     offer.value:"IsFeaturedMerchant"::BOOLEAN as IsFeaturedMerchant,
     offer.value:"IsFulfilledByAmazon"::BOOLEAN as IsFulfilledByAmazon,
-    md5(concat(offer.value:"SellerId", EventTime,IsFeaturedMerchant,IsFulfilledByAmazon,id)) as surrogate_key,
+    md5(concat(offer.value:"SellerId", EventTime,IsFeaturedMerchant,IsFulfilledByAmazon)) as surrogate_key,
     current_timestamp() as updated_at
 from flatten_payload f, LATERAL FLATTEN(input=>f.offers) as offer
 

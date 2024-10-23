@@ -10,6 +10,7 @@ flatten_payload as (
 ),
 flatten_notification as (
     select
+        UUID_STRING() AS surrogatekey,
         NotificationId,
         offer.value:"Condition"::STRING as Condition,
         offer.value:"FulfillmentChannel"::STRING as FulfillmentChannel,
